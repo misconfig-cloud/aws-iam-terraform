@@ -22,30 +22,6 @@ resource "aws_iam_role" "misconfig-cloud-onboarding-policy" {
 EOF
 }
 
-# Main IAM role for Misconfig Cloud
-resource "aws_iam_role" "misconfig_cloud_role" {
-  name               = var.role_name
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "${var.misconfig_account_id}"
-      },
-      "Action": "sts:AssumeRole",
-      "Condition": {
-        "StringEquals": {
-          "sts:ExternalId": "${var.external_id}"
-        }
-      }
-    }
-  ]
-}
-EOF
-}
-
 # EventBridge Policy for the IAM role
 resource "aws_iam_policy" "misconfig_eventbridge_policy" {
   name   = "Misconfig-EventBridge-Policy"
