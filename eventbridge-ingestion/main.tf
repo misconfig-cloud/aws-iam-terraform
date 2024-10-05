@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_iam_role" "misconfig-cloud-onboarding-policy" {
+resource "aws_iam_role" "misconfig-cloud-onboarding-role" {
   name               = var.role_name
 
   assume_role_policy = <<EOF
@@ -140,25 +140,25 @@ EOF
 
 # Attach S3 bucket policy to the role
 resource "aws_iam_role_policy_attachment" "s3_bucket_policy_attach" {
-  role       = aws_iam_role.misconfig_cloud_role.name
+  role       = aws_iam_role.misconfig-cloud-onboarding-role.name
   policy_arn = aws_iam_policy.misconfig_s3_bucket_policy.arn
 }
 
 # Attach CloudFormation policy to the role
 resource "aws_iam_role_policy_attachment" "cloudformation_policy_attach" {
-  role       = aws_iam_role.misconfig-cloud-onboarding-policy.name
+  role       = aws_iam_role.misconfig-cloud-onboarding-role.name
   policy_arn = aws_iam_policy.misconfig_cloudformation_policy.arn
 }
 
 # Attach EventBridge policy to the role
 resource "aws_iam_role_policy_attachment" "eventbridge_policy_attach" {
-  role       = aws_iam_role.misconfig-cloud-onboarding-policy.name
+  role       = aws_iam_role.misconfig-cloud-onboarding-role.name
   policy_arn = aws_iam_policy.misconfig_eventbridge_policy.arn
 }
 
 # Attach CloudTrail policy to the role
 resource "aws_iam_role_policy_attachment" "cloudtrail_policy_attach" {
-  role       = aws_iam_role.misconfig-cloud-onboarding-policy.name
+  role       = aws_iam_role.misconfig-cloud-onboarding-role.name
   policy_arn = aws_iam_policy.misconfig_cloudtrail_policy.arn
 }
 
