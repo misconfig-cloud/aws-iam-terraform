@@ -126,7 +126,8 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
         "s3:PutObject",
         "s3:GetObject",
         "s3:DeleteObject",
-        "s3:ListBucket"
+        "s3:ListBucket",
+        "s3:PutEncryptionConfiguration"
       ],
       "Resource": [
         "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${var.aws_account_id}",
