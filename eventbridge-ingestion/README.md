@@ -29,10 +29,9 @@ Here is how you can use this module in your Terraform configuration:
 
 ```hcl
 module "eventbridge-ingestion" {
-  source = "git::https://github.com/misconfig-cloud/aws-iam-terraform.git//eventbridge-ingestion"
-
+  source                = "git::https://github.com/misconfig-cloud/aws-iam-terraform.git//eventbridge-ingestion"
   external_id           = "123"   # The external ID given by Misconfig.cloud
-  misconfig_aws_account = "730335354084"  # The AWS account ID that will assume the role
+  aws_account_id        = "730335354084"  # This is your AWS account ID that will be used for the role template
 }
 
 ```
