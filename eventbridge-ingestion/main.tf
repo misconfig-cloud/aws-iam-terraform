@@ -63,7 +63,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "secretsmanager:PutSecretValue",
         "secretsmanager:GetSecretValue",
         "secretsmanager:UpdateSecret",
-        "secretsmanager:DeleteSecret",
+        "secretsmanager:DeleteSecret"
       ],
       "Resource": [
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
