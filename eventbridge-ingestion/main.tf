@@ -59,7 +59,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud/*",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination/*",
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/ApiConnection"
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/misconfig-cloud-api-connection"
       ]
     },
 {
