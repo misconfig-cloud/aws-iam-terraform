@@ -55,7 +55,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:CreateEventBus",
         "events:DeleteEventBus",
         "iam:CreateServiceLinkedRole",
-        "iam:PassRole",
+        "iam:PassRole"
       ],
       "Resource": [
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
