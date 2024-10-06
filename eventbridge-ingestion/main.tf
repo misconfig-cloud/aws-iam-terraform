@@ -52,7 +52,8 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:UpdateConnection",
         "events:DeleteConnection",
         "events:DescribeEventBus",
-        "events:CreateEventBus"
+        "events:CreateEventBus",
+        "events:DeleteEventBus"
       ],
       "Resource": [
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
@@ -84,7 +85,8 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:DeletePolicy",
         "iam:GetPolicy",
         "iam:ListPolicyVersions",
-        "iam:GetRole"
+        "iam:GetRole",
+        "iam:CreateRole"
       ],
       "Resource": [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
