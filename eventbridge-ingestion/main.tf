@@ -54,10 +54,10 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:DescribeEventBus"
       ],
       "Resource": [
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",  # Specific event bus
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud/*",      # Specific EventBridge rules
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination/*",  # Specific API destination
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/ApiConnection"  # Specific EventBridge connection
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud/*",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination/*",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/ApiConnection"
       ]
     },
     {
@@ -70,7 +70,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "secretsmanager:DeleteSecret"
       ],
       "Resource": [
-        "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:ApiDestinationPasswordSecret"  # Specific secret
+        "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:ApiDestinationPasswordSecret"
       ]
     },
     {
@@ -82,8 +82,8 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:DeletePolicy"
       ],
       "Resource": [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",  # Specific IAM policy
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Amazon_EventBridge_Invoke_Api_Destination_Role"  # Specific IAM role for EventBridge
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Amazon_EventBridge_Invoke_Api_Destination_Role"
       ]
     }
   ]
