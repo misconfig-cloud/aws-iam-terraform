@@ -98,7 +98,8 @@ resource "aws_iam_policy" "misconfig_cloudformation_policy" {
         "cloudformation:DescribeStackEvents",
         "cloudformation:DescribeStackResources",
         "cloudformation:ListStackResources",
-        "cloudformation:ListStacks"
+        "cloudformation:ListStacks",
+        "cloudtrail:PutInsightSelectors"
       ],
       "Resource": "*"
     }
