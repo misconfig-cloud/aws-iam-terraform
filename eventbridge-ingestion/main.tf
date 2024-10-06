@@ -60,7 +60,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/ApiConnection"
       ]
     },
-    {
+{
       "Effect": "Allow",
       "Action": [
         "secretsmanager:CreateSecret",
@@ -70,6 +70,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "secretsmanager:DeleteSecret"
       ],
       "Resource": [
+        "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:ApiDestinationPasswordSecret-*",
         "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:ApiDestinationPasswordSecret"
       ]
     },
@@ -79,7 +80,8 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:CreatePolicy",
         "iam:AttachRolePolicy",
         "iam:DetachRolePolicy",
-        "iam:DeletePolicy"
+        "iam:DeletePolicy",
+        "iam:GetPolicy"
       ],
       "Resource": [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
