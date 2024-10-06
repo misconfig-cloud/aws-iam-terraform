@@ -2,6 +2,10 @@ provider "aws" {
   region = var.region
 }
 
+# Data source to get the AWS account ID
+data "aws_caller_identity" "current" {}
+
+# Misconfig Role
 resource "aws_iam_role" "misconfig-cloud-onboarding-role" {
   name               = var.role_name
 
@@ -116,9 +120,11 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
         "s3:PutBucketPublicAccessBlock",
         "s3:PutBucketEncryption",
         "s3:PutBucketOwnershipControls",
-        "s3:PutBucketTagging"
+        "s3:PutBucketTagging",
+        "s3:PutBucketPolicy",
+        "s3:DeleteBucketPolicy"
       ],
-      "Resource": "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${var.aws_account_id}"
+      "Resource": "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}"
     },
     {
       "Effect": "Allow",
@@ -127,12 +133,19 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
         "s3:GetObject",
         "s3:DeleteObject",
         "s3:ListBucket",
-        "s3:PutEncryptionConfiguration"
+        "s3:PutEncryptionConfiguration",
+        "s3:GetBucketAcl",
+        "s3:PutObjectAcl"
       ],
       "Resource": [
-        "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${var.aws_account_id}",
-        "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${var.aws_account_id}/*"
-      ]
+        "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}",
+        "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+      }
     }
   ]
 }
