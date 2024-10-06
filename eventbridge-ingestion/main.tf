@@ -107,7 +107,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:DeleteRole",
         "iam:TagRole",
         "iam:ListAttachedRolePolicies",
-        "iam:ListInstanceProfilesForRole
+        "iam:ListInstanceProfilesForRole"
       ],
       "Resource": [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
