@@ -103,6 +103,16 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Amazon_EventBridge_Invoke_Api_Destination_Role"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "apidestinations.events.amazonaws.com"
+        }
+      }
     }
   ]
 }
