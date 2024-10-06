@@ -49,14 +49,47 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:DeleteApiDestination",
         "events:CreateConnection",
         "events:UpdateConnection",
-        "events:DeleteConnection"
+        "events:DeleteConnection",
+        "events:DescribeEventBus"
       ],
-      "Resource": "*"
+      "Resource": [
+        "arn:aws:events:${AWS::Region}:${AWS::AccountId}:event-bus/misconfig-cloud",  # Specific event bus
+        "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/misconfig-cloud/*",      # Specific EventBridge rules
+        "arn:aws:events:${AWS::Region}:${AWS::AccountId}:api-destination/misconfig-cloud-ingest-destination/*",  # Specific API destination
+        "arn:aws:events:${AWS::Region}:${AWS::AccountId}:connection/MisconfigCloudApiConnection"  # Specific EventBridge connection
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:UpdateSecret",
+        "secretsmanager:DeleteSecret"
+      ],
+      "Resource": [
+        "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:ApiDestinationPasswordSecret"  # Specific secret
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreatePolicy",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeletePolicy"
+      ],
+      "Resource": [
+        "arn:aws:iam::${AWS::AccountId}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",  # Specific IAM policy
+        "arn:aws:iam::${AWS::AccountId}:role/Amazon_EventBridge_Invoke_Api_Destination_Role"  # Specific IAM role for EventBridge
+      ]
     }
   ]
 }
 EOF
 }
+
 
 # CloudTrail Policy for the IAM role
 resource "aws_iam_policy" "misconfig_cloudtrail_policy" {
