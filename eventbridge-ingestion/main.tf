@@ -134,7 +134,7 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
       "Resource": [
         "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}",
         "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}/*"
-      ],
+      ]
     }
   ]
 }
