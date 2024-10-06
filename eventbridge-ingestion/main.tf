@@ -53,13 +53,16 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:DeleteConnection",
         "events:DescribeEventBus",
         "events:CreateEventBus",
-        "events:DeleteEventBus"
+        "events:DeleteEventBus",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
       ],
       "Resource": [
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud/*",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination/*",
-        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/misconfig-cloud-api-connection"
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/misconfig-cloud-api-connection",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/apidestinations.events.amazonaws.com/*"
       ]
     },
 {
@@ -87,8 +90,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:ListPolicyVersions",
         "iam:GetRole",
         "iam:CreateRole",
-        "iam:DeleteRole",
-        "iam:CreateServiceLinkedRole"
+        "iam:DeleteRole"
       ],
       "Resource": [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
@@ -115,7 +117,8 @@ resource "aws_iam_policy" "misconfig_cloudtrail_policy" {
         "cloudtrail:DeleteTrail",
         "cloudtrail:StartLogging",
         "cloudtrail:StopLogging",
-        "cloudtrail:PutEventSelectors"
+        "cloudtrail:PutEventSelectors",
+        "cloudtrail:PutInsightSelectors"
       ],
       "Resource": "*"
     }
@@ -141,8 +144,8 @@ resource "aws_iam_policy" "misconfig_cloudformation_policy" {
         "cloudformation:DescribeStackEvents",
         "cloudformation:DescribeStackResources",
         "cloudformation:ListStackResources",
-        "cloudformation:ListStacks",
-        "cloudtrail:PutInsightSelectors"
+        "cloudformation:ListStacks"
+        
       ],
       "Resource": "*"
     }
