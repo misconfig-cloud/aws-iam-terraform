@@ -67,9 +67,12 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
       ],
       "Resource": [
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:event-bus/misconfig-cloud",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/misconfig-cloud/*",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:api-destination/misconfig-cloud-ingest-destination/*",
         "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/misconfig-cloud-api-connection",
+        "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:connection/misconfig-cloud-api-connection/*",
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/apidestinations.events.amazonaws.com/*",
         "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:events!connection/misconfig-cloud-api-connection/*"
       ]
@@ -103,7 +106,8 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "iam:CreateRole",
         "iam:DeleteRole",
         "iam:TagRole",
-        "iam:ListAttachedRolePolicies"
+        "iam:ListAttachedRolePolicies",
+        "iam:ListInstanceProfilesForRole,
       ],
       "Resource": [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/Amazon_EventBridge_Invoke_Api_Destination_Policy",
