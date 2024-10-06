@@ -57,6 +57,7 @@ resource "aws_iam_policy" "misconfig_eventbridge_policy" {
         "events:DescribeRule",
         "events:ListTagsForResource",
         "events:DescribeConnection",
+        "events:DescribeApiDestination",
         "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "secretsmanager:CreateSecret",
