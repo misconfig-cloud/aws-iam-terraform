@@ -116,6 +116,13 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
     {
       "Effect": "Allow",
       "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject",
+        "s3:ListBucket",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetBucketAcl",
+        "s3:PutObjectAcl",
         "s3:CreateBucket",
         "s3:PutBucketPublicAccessBlock",
         "s3:PutBucketEncryption",
@@ -124,28 +131,10 @@ resource "aws_iam_policy" "misconfig_s3_bucket_policy" {
         "s3:PutBucketPolicy",
         "s3:DeleteBucketPolicy"
       ],
-      "Resource": "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:DeleteObject",
-        "s3:ListBucket",
-        "s3:PutEncryptionConfiguration",
-        "s3:GetBucketAcl",
-        "s3:PutObjectAcl"
-      ],
       "Resource": [
         "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}",
         "arn:aws:s3:::misconfig-aws-cloudtrail-logs-${data.aws_caller_identity.current.account_id}/*"
       ],
-      "Condition": {
-        "StringEquals": {
-          "s3:x-amz-acl": "bucket-owner-full-control"
-        }
-      }
     }
   ]
 }
