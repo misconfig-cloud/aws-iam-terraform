@@ -1,8 +1,3 @@
-variable "aws_account_id" {
-  description = "Customer AWS Account ID used to create specific bucket for CloudTrail events"
-  type        = string
-}
-
 variable "external_id" {
   description = "External ID used to secure role assumptions"
   type        = string

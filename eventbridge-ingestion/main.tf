@@ -71,7 +71,8 @@ resource "aws_iam_policy" "misconfig_cloudtrail_policy" {
         "cloudtrail:CreateTrail",
         "cloudtrail:DeleteTrail",
         "cloudtrail:StartLogging",
-        "cloudtrail:StopLogging"
+        "cloudtrail:StopLogging",
+        "cloudtrail:PutEventSelectors"
       ],
       "Resource": "*"
     }
